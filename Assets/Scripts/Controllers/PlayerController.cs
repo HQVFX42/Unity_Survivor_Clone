@@ -7,6 +7,18 @@ public class PlayerController : MonoBehaviour
     Vector2 _moveDirection;
     float _speed = 5.0f;
 
+    public Vector2 MoveDirection
+    {
+        get
+        {
+            return _moveDirection;
+        }
+        set
+        {
+            _moveDirection = value.normalized;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateInput();
+        //UpdateInput();
         MovePlayer();
     }
 
@@ -46,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
+        _moveDirection = Managers.MoveDirection;
         Vector3 dir = _moveDirection * _speed * Time.deltaTime;
         transform.position += dir;
     }

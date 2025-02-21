@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
+    public static Vector2 MoveDirection { get; set; }
     // Start is called before the first frame update
     void Start()
     {

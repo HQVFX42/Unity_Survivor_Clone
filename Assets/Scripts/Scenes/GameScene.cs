@@ -5,16 +5,23 @@ using UnityEngine;
 public class GameScene : MonoBehaviour
 {
     public GameObject _heroPrefab;
+    public GameObject _joystickPrefab;
+
     public GameObject _monster1Prefab;
     public GameObject _monster2Prefab;
 
     GameObject _hero;
+    GameObject _joystick;
+
     GameObject _monster1;
     GameObject _monster2;
+
     // Start is called before the first frame update
     void Start()
     {
         _hero = GameObject.Instantiate(_heroPrefab);
+        _joystick = GameObject.Instantiate(_joystickPrefab);
+
         _monster1 = GameObject.Instantiate(_monster1Prefab);
         _monster2 = GameObject.Instantiate(_monster2Prefab);
 
@@ -28,6 +35,8 @@ public class GameScene : MonoBehaviour
         _monster2.name = _monster2Prefab.name;
 
         _hero.AddComponent<PlayerController>();
+
+        Camera.main.GetComponent<CameraController>().Target = _hero;
     }
 
     // Update is called once per frame

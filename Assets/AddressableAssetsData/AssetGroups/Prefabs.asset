@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: Prefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3dbe5eeb9a4d7cf4f8e99447ced00005
+  m_SerializeEntries:
+  - m_GUID: 0805c041815a6774aa8433f4b70fe31a
+    m_Address: Player_01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  - m_GUID: be75dbc217a586f4da9f0273b81cb5cd
+    m_Address: Monster_01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  - m_GUID: e9ed0d33bdf6b43448a14f56ca8e3c9a
+    m_Address: Monster_02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  - m_GUID: d752f911ee45bc7499d7c0ada3005181
+    m_Address: UI_Joystick.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  - m_GUID: 14b914cec36fda54a90984abb1b3a6a3
+    m_Address: Map_01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: fa99e640eb58f64449df29fb1ab009cc, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 290002fbdc457ba49a0fe4bc6e1158f5, type: 2}
+    - {fileID: 11400000, guid: fca115d0ddcdff642aadd37aafd41c8b, type: 2}

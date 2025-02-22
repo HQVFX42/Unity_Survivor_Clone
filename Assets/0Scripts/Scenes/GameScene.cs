@@ -13,7 +13,7 @@ public class GameScene : MonoBehaviour
 
             if (totalCount == count)
             {
-                StartLoaded();
+                StartLoaded2();
             }
         });
     }
@@ -23,12 +23,29 @@ public class GameScene : MonoBehaviour
         var player = Managers.Resource.Instantiate("Player_01.prefab");
         player.AddComponent<PlayerController>();
 
+        var monster01 = Managers.Resource.Instantiate("Monster_01.prefab");
+
         var map = Managers.Resource.Instantiate("Map_01.prefab");
         var joystick = Managers.Resource.Instantiate("UI_Joystick.prefab");
 
-        var monster01 = Managers.Resource.Instantiate("Monster_01.prefab");
 
         Camera.main.GetComponent<CameraController>().Target = player;
+    }
+
+    void StartLoaded2()
+    {
+        PlayerController player = Managers.Object.Spawn<PlayerController>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            MonsterController monster = Managers.Object.Spawn<MonsterController>(Random.Range(0, 2));
+            monster.transform.position = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        }
+
+        var joystick = Managers.Resource.Instantiate("UI_Joystick.prefab");
+        var map = Managers.Resource.Instantiate("Map_01.prefab");
+
+        Camera.main.GetComponent<CameraController>().Target = player.gameObject;
     }
 
     // Update is called once per frame

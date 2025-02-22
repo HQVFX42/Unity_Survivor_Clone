@@ -30,6 +30,11 @@ public class ResourceManager
             return null;
         }
 
+        if (pooling)
+        {
+            // TODO: pooling
+        }
+
         GameObject go = UnityEngine.Object.Instantiate(prefab, parent);
         go.name = prefab.name;
         return go;

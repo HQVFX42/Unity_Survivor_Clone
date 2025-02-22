@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager
 {
+    //public PlayerController Player { get { return Managers.Object?.Player; } }
+
     Vector2 _moveDirection;
 
     public Vector2 MoveDir

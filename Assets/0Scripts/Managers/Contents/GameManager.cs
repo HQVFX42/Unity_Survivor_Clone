@@ -7,6 +7,12 @@ public class GameManager
 {
     //public PlayerController Player { get { return Managers.Object?.Player; } }
 
+    #region Currency
+    public int Gold {  get; set; }
+    public int Gem { get; set; }
+    #endregion
+
+    #region Movement
     Vector2 _moveDirection;
 
     public Vector2 MoveDir
@@ -20,4 +26,5 @@ public class GameManager
             _moveDirection = value.normalized;
         }
     }
+    #endregion
 }

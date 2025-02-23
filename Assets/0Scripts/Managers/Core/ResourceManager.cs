@@ -32,7 +32,7 @@ public class ResourceManager
 
         if (pooling)
         {
-            // TODO: pooling
+            return Managers.Pool.Pop(prefab);
         }
 
         GameObject go = UnityEngine.Object.Instantiate(prefab, parent);
@@ -47,11 +47,11 @@ public class ResourceManager
             return;
         }
 
-        //if (Managers.Pool.Push(go))
-        //{
-        //    return;
-        //}
-        
+        if (Managers.Pool.Push(go))
+        {
+            return;
+        }
+
         UnityEngine.Object.Destroy(go);
     }
 

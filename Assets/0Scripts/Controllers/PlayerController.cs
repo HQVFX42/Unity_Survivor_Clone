@@ -45,6 +45,7 @@ public class PlayerController : CreatureController
     void CollectEnv()
     {
         float sqrCollectRange = EnvCollectRange * EnvCollectRange;
+
         List<GemController> gems = Managers.Object.Gems.ToList();
         foreach (GemController gem in gems)
         {
@@ -55,6 +56,9 @@ public class PlayerController : CreatureController
                 Managers.Object.Despawn(gem);
             }
         }
+
+        var findGems = GameObject.Find("Grid").GetComponent<GridController>().GetAllObjects(transform.position, EnvCollectRange + 0.5f);
+        Debug.Log($"findGems: {findGems.Count} TotalGems: {gems.Count}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

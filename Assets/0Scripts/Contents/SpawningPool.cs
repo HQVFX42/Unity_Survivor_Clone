@@ -31,8 +31,8 @@ public class SpawningPool : MonoBehaviour
             return;
         }
 
-        // TODO : Get monster data
-        MonsterController mc = Managers.Object.Spawn<MonsterController>(Random.Range(0, 2));
-        mc.transform.position = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        //TODO : Get monster data
+        Vector3 randPos = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        MonsterController mc = Managers.Object.Spawn<MonsterController>(randPos, Random.Range(0, 2));
     }
 }

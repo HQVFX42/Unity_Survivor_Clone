@@ -51,9 +51,9 @@ public class PlayerController : CreatureController
     {
         base.OnDamaged(attacker, damage);
 
-        Debug.Log($"OnDamaged: Hp = {Hp}, {damage} by {attacker.name} ");
+        //Debug.Log($"OnDamaged: Hp = {Hp}, {damage} by {attacker.name} ");
 
         CreatureController cc = attacker as CreatureController;
-        cc?.OnDamaged(this, 10);
+        cc?.OnDamaged(this, 100);
     }
 }

@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        // TODO
+        //TODO
         transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, -10);
     }
 }

@@ -7,7 +7,7 @@ public class GameScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Resource.LoadAllAsync<GameObject>("Prefabs", (key, count, totalCount) =>
+        Managers.Resource.LoadAllAsync<Object>("PreLoad", (key, count, totalCount) =>
         {
             Debug.Log($"[Load] key: {key}, {count}/{totalCount}");
 
@@ -24,13 +24,13 @@ public class GameScene : MonoBehaviour
     {
         _spawningPool = gameObject.AddComponent<SpawningPool>();
 
-        PlayerController player = Managers.Object.Spawn<PlayerController>();
+        PlayerController player = Managers.Object.Spawn<PlayerController>(Vector3.zero);
 
-        //for (int i = 0; i < 100; i++)
-        //{
-        //    MonsterController monster = Managers.Object.Spawn<MonsterController>(Random.Range(0, 2));
-        //    monster.transform.position = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
-        //}
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 randPos = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+            MonsterController monster = Managers.Object.Spawn<MonsterController>(randPos, Random.Range(0, 2));
+        }
 
         var joystick = Managers.Resource.Instantiate("UI_Joystick.prefab");
         var map = Managers.Resource.Instantiate("Map_01.prefab");
@@ -41,6 +41,6 @@ public class GameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

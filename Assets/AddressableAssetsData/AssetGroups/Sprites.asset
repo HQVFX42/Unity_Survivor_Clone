@@ -10,35 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Prefabs
+  m_Name: Sprites
   m_EditorClassIdentifier: 
-  m_GroupName: Prefabs
+  m_GroupName: Sprites
   m_Data:
     m_SerializedData: []
-  m_GUID: 3dbe5eeb9a4d7cf4f8e99447ced00005
+  m_GUID: 0c5b33915d632fa4390008ed27a1e777
   m_SerializeEntries:
-  - m_GUID: 0805c041815a6774aa8433f4b70fe31a
-    m_Address: Player_01.prefab
+  - m_GUID: ad9452b9dc6302d4dacb39ad97181b7e
+    m_Address: ExpGem_01.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-  - m_GUID: be75dbc217a586f4da9f0273b81cb5cd
-    m_Address: Monster_01.prefab
+  - m_GUID: 4c5abafcb2a92ce438416aee6cff3a36
+    m_Address: ExpGem_02.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-  - m_GUID: e9ed0d33bdf6b43448a14f56ca8e3c9a
-    m_Address: Monster_02.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-  - m_GUID: 14b914cec36fda54a90984abb1b3a6a3
-    m_Address: Map_01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-  - m_GUID: 38cc56dbf75512445ac888bf4b4f7ae1
-    m_Address: ExpGem.prefab
+  - m_GUID: a8e054432eb8ddc40bf58eb7003956da
+    m_Address: ExpGem_03.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -46,5 +36,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: fa99e640eb58f64449df29fb1ab009cc, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 290002fbdc457ba49a0fe4bc6e1158f5, type: 2}
-    - {fileID: 11400000, guid: fca115d0ddcdff642aadd37aafd41c8b, type: 2}
+    - {fileID: 11400000, guid: 81e8bb40482809940bc0b22aeda9ad01, type: 2}
+    - {fileID: 11400000, guid: 2b3d0f37f8e9a784783826367462b34f, type: 2}

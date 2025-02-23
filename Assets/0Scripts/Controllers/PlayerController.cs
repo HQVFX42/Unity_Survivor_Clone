@@ -21,10 +21,18 @@ public class PlayerController : CreatureController
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override bool Init()
     {
+        if (!base.Init())
+        {
+            return false;
+        }
+
+        _speed = 5.0f;
         
+        StartProjectile();
+
+        return true;
     }
 
     // Update is called once per frame
@@ -37,7 +45,6 @@ public class PlayerController : CreatureController
     private void MovePlayer()
     {
         _moveDirection = Managers.Game.MoveDir;
-        _speed = 5.0f;
         Vector3 dir = _moveDirection * _speed * Time.deltaTime;
         transform.position += dir;
     }
@@ -58,7 +65,7 @@ public class PlayerController : CreatureController
         }
 
         var findGems = GameObject.Find("Grid").GetComponent<GridController>().GetAllObjects(transform.position, EnvCollectRange + 0.5f);
-        Debug.Log($"findGems: {findGems.Count} TotalGems: {gems.Count}");
+        //Debug.Log($"findGems: {findGems.Count} TotalGems: {gems.Count}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -79,4 +86,34 @@ public class PlayerController : CreatureController
         CreatureController cc = attacker as CreatureController;
         cc?.OnDamaged(this, 100);
     }
+
+    //TODO: refactoring
+    #region FireProjectile
+
+    Coroutine _coFireProjectile;
+
+    void StartProjectile()
+    {
+        if (_coFireProjectile != null)
+        {
+            StopCoroutine(_coFireProjectile);
+        }
+
+        _coFireProjectile = StartCoroutine(CoStartProjectile());
+    }
+
+    IEnumerator CoStartProjectile()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.5f);
+
+        while (true)
+        {
+            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(transform.position, 1);
+            pc.SetInfo(1, this, _moveDirection);
+
+            yield return wait;
+        }
+    }
+
+    #endregion
 }

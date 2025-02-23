@@ -25,6 +25,14 @@ public class Define
         Env,
     }
 
+    public enum ESkillType
+    {
+        None,
+        Melee,
+        Projectile,
+        Misc,
+    }
+
     public const int PLAYER_DATA_ID = 1;
     public const string EXP_GEM_PREFAB = "ExpGem.prefab";
 }

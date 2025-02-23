@@ -22,6 +22,8 @@ public class GameScene : MonoBehaviour
 
     void StartLoaded()
     {
+        Managers.Data.Init();
+
         _spawningPool = gameObject.AddComponent<SpawningPool>();
 
         PlayerController player = Managers.Object.Spawn<PlayerController>(Vector3.zero);

@@ -13,11 +13,15 @@ public interface ILoader<Key, Value>
 public class DataManager
 {
     public Dictionary<int, Data.PlayerData> PlayerDictionary { get; private set; } = new Dictionary<int, Data.PlayerData>();
+    public Dictionary<int, Data.MonsterData> MonsterDictionary { get; private set; } = new Dictionary<int, Data.MonsterData>();
+    public Dictionary<int, Data.SkillData> SkillDictionary { get; private set; } = new Dictionary<int, Data.SkillData>();
 
     public void Init()
     {
-        PlayerDictionary = LoadJson<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData.json").MakeDictionary();
+        //PlayerDictionary = LoadJson<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData.json").MakeDictionary();
         //PlayerDictionary = LoadXml<Data.PlayerDataLoader, int, Data.PlayerData>("PlayerData.xml").MakeDictionary();
+        //MonsterDictionary = LoadXml<Data.MonsterDataLoader, int, Data.MonsterData>("MonsterData.xml").MakeDictionary();
+        SkillDictionary = LoadXml<Data.SkillDataLoader, int, Data.SkillData>("SkillData.xml").MakeDictionary();
     }
 
     #region Xml

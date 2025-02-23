@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectManager
 {
@@ -57,12 +58,25 @@ public class ObjectManager
 
             return gc as T;
         }
+        else if (typeof(T).IsSubclassOf(typeof(SkillController)))
+        {
+            GameObject go = Managers.Resource.Instantiate("FireProjectile.prefab", pooling: true);
+            go.transform.position = position;
+
+            ProjectileController pc = go.GetOrAddComponent<ProjectileController>();
+            Projectiles.Add(pc);
+            pc.Init();
+
+            return pc as T;
+        }
 
         return null;
     }
 
     public void Despawn<T>(T obj) where T : BaseController
-    {
+    {        
+        Debug.Assert(obj.IsValid(), "Invalid object");
+
         System.Type type = typeof(T);
 
         if (type == typeof(PlayerController))
@@ -86,6 +100,11 @@ public class ObjectManager
 
             //TODO: Add grid controller
             GameObject.Find("Grid").GetComponent<GridController>().Remove(obj.gameObject);
+        }
+        else if (typeof(T).IsSubclassOf(typeof(ProjectileController)))
+        {
+            Projectiles.Remove(obj as ProjectileController);
+            Managers.Resource.Destroy(obj.gameObject);
         }
     }
 }

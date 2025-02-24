@@ -66,9 +66,11 @@ public class PlayerController : CreatureController
     {
         float sqrCollectRange = EnvCollectRange * EnvCollectRange;
 
-        List<GemController> gems = Managers.Object.Gems.ToList();
-        foreach (GemController gem in gems)
+        var findGems = GameObject.Find("Grid").GetComponent<GridController>().GetAllObjects(transform.position, EnvCollectRange + 0.5f);
+        foreach (var go in findGems)
         {
+            GemController gem = go.GetComponent<GemController>();
+
             Vector3 dir = gem.transform.position - transform.position;
             if (dir.sqrMagnitude <= sqrCollectRange)
             {
@@ -77,8 +79,6 @@ public class PlayerController : CreatureController
             }
         }
 
-        var findGems = GameObject.Find("Grid").GetComponent<GridController>().GetAllObjects(transform.position, EnvCollectRange + 0.5f);
-        //Debug.Log($"findGems: {findGems.Count} TotalGems: {gems.Count}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

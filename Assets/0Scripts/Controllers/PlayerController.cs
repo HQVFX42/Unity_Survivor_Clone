@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class PlayerController : CreatureController
 {
-    Vector2 _moveDirection;
+    Vector2 _moveDirection = Vector2.zero;
 
     float EnvCollectRange = 1.0f;
+
+    [SerializeField]
+    Transform _indicator;
+
+    [SerializeField]
+    Transform _fireSocket;
 
     public Vector2 MoveDirection
     {
@@ -47,6 +53,13 @@ public class PlayerController : CreatureController
         _moveDirection = Managers.Game.MoveDir;
         Vector3 dir = _moveDirection * _speed * Time.deltaTime;
         transform.position += dir;
+
+        if (_moveDirection != Vector2.zero)
+        {
+            _indicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI - 90);
+        }
+
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     void CollectEnv()
@@ -108,8 +121,8 @@ public class PlayerController : CreatureController
 
         while (true)
         {
-            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(transform.position, 1);
-            pc.SetInfo(1, this, _moveDirection);
+            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(_fireSocket.position, 1);
+            pc.SetInfo(1, this, (_fireSocket.position - _indicator.position).normalized);
 
             yield return wait;
         }

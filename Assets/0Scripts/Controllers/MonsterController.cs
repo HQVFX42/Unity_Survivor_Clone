@@ -34,7 +34,11 @@ public class MonsterController : CreatureController
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerController target = collision.gameObject.GetComponent<PlayerController>();
-        if (target == null)
+        if (!target.IsValid())
+        {
+            return;
+        }
+        if (!this.IsValid())    // Always check when using pooling method
         {
             return;
         }
@@ -49,7 +53,11 @@ public class MonsterController : CreatureController
     public void OnCollisionExit2D(Collision2D collision)
     {
         PlayerController target = collision.gameObject.GetComponent<PlayerController>();
-        if (target == null)
+        if (!target.IsValid())
+        {
+            return;
+        }
+        if (!this.IsValid())    // Always check when using pooling method
         {
             return;
         }

@@ -28,9 +28,9 @@ public class GameScene : MonoBehaviour
 
         PlayerController player = Managers.Object.Spawn<PlayerController>(Vector3.zero);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 25; i++)
         {
-            Vector3 randPos = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+            Vector3 randPos = new Vector2(Random.Range(-20, 20), Random.Range(-20, 20));
             MonsterController monster = Managers.Object.Spawn<MonsterController>(randPos, Random.Range(0, 2));
         }
 

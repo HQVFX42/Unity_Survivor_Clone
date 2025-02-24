@@ -92,6 +92,8 @@ public class PlayerController : CreatureController
                 Managers.Game.Gem += 1;
                 Managers.Object.Despawn(gem);
             }
+
+            Debug.Log($"Gem: {Managers.Game.Gem}, GemInRange: {findGems.Count}");
         }
 
     }
@@ -111,8 +113,8 @@ public class PlayerController : CreatureController
 
         //Debug.Log($"OnDamaged: Hp = {Hp}, {damage} by {attacker.name} ");
 
-        CreatureController cc = attacker as CreatureController;
-        cc?.OnDamaged(this, 100);
+        //CreatureController cc = attacker as CreatureController;
+        //cc?.OnDamaged(this, 100);
     }
 
     //TODO: refactoring

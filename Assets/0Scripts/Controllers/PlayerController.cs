@@ -15,16 +15,22 @@ public class PlayerController : CreatureController
     [SerializeField]
     Transform _fireSocket;
 
-    public Vector2 MoveDirection
+    //public Vector2 MoveDirection
+    //{
+    //    get
+    //    {
+    //        return _moveDirection;
+    //    }
+    //    set
+    //    {
+    //        _moveDirection = value.normalized;
+    //    }
+    //}
+
+    void OnDestroy()
     {
-        get
-        {
-            return _moveDirection;
-        }
-        set
-        {
-            _moveDirection = value.normalized;
-        }
+        if (Managers.Game != null)
+            Managers.Game.OnMoveDirectionChanged -= HandleOnMoveDirectionChanged;
     }
 
     public override bool Init()
@@ -35,7 +41,10 @@ public class PlayerController : CreatureController
         }
 
         _speed = 5.0f;
-        
+
+        //event
+        Managers.Game.OnMoveDirectionChanged += HandleOnMoveDirectionChanged;
+
         StartProjectile();
 
         return true;
@@ -48,9 +57,14 @@ public class PlayerController : CreatureController
         CollectEnv();
     }
 
+    void HandleOnMoveDirectionChanged(Vector2 dir)
+    {
+        _moveDirection = dir;
+    }
+
     private void MovePlayer()
     {
-        _moveDirection = Managers.Game.MoveDir;
+        //_moveDirection = Managers.Game.MoveDir;
         Vector3 dir = _moveDirection * _speed * Time.deltaTime;
         transform.position += dir;
 

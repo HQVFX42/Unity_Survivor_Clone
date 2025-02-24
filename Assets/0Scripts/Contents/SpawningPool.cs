@@ -11,7 +11,10 @@ public class SpawningPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _coUpdateSpawningPool = StartCoroutine(CoUpdateSpawningPool());
+        if (_coUpdateSpawningPool == null)
+        {
+            _coUpdateSpawningPool = StartCoroutine(CoUpdateSpawningPool());
+        }
     }
 
     IEnumerator CoUpdateSpawningPool()
@@ -32,7 +35,8 @@ public class SpawningPool : MonoBehaviour
         }
 
         //TODO : Get monster data
-        Vector3 randPos = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        //Vector3 randPos = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        Vector3 randPos = Utils.GenerateMonsterSpawnPosition(Managers.Game.Player.transform.position, 10, 15);
         MonsterController mc = Managers.Object.Spawn<MonsterController>(randPos, Random.Range(0, 2));
     }
 }

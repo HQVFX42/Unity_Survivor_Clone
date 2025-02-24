@@ -61,4 +61,17 @@ public class Utils
 
         return null;
     }
+
+    public static Vector2 GenerateMonsterSpawnPosition(Vector2 playerPosition, float minDistance = 10.0f, float maxDistance = 20.0f)
+    {
+        float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
+        float distance = Random.Range(minDistance, maxDistance);
+
+        float xDistance = Mathf.Cos(angle) * distance;
+        float yDistance = Mathf.Sin(angle) * distance;
+
+        Vector2 spawnPosition = playerPosition + new Vector2(xDistance, yDistance);
+
+        return spawnPosition;
+    }
 }

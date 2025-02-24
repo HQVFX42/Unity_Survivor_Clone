@@ -24,6 +24,8 @@ public class ObjectManager
 
             PlayerController pc = go.GetOrAddComponent<PlayerController>();
             Player = pc;
+            Managers.Game.Player = pc;
+
             pc.Init();
 
             return pc as T;
@@ -58,7 +60,7 @@ public class ObjectManager
 
             return gc as T;
         }
-        else if (typeof(T).IsSubclassOf(typeof(SkillController)))
+        else if (type == typeof(ProjectileController))
         {
             GameObject go = Managers.Resource.Instantiate("FireProjectile.prefab", pooling: true);
             go.transform.position = position;
@@ -100,11 +102,6 @@ public class ObjectManager
 
             //TODO: Add grid controller
             GameObject.Find("Grid").GetComponent<GridController>().Remove(obj.gameObject);
-        }
-        else if (typeof(T).IsSubclassOf(typeof(ProjectileController)))
-        {
-            Projectiles.Remove(obj as ProjectileController);
-            Managers.Resource.Destroy(obj.gameObject);
         }
     }
 }

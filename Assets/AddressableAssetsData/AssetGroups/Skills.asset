@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 323b234017018b5489b600963af4aea0
   m_SerializeEntries:
   - m_GUID: be65551eecc7ea64589c7932ed258169
-    m_Address: EgoSword.prefab
+    m_Address: Sword.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

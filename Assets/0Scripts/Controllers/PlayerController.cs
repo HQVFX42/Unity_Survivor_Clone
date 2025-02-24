@@ -45,7 +45,8 @@ public class PlayerController : CreatureController
         //event
         Managers.Game.OnMoveDirectionChanged += HandleOnMoveDirectionChanged;
 
-        StartProjectile();
+        //StartProjectile();
+        StartSword();
 
         return true;
     }
@@ -70,7 +71,7 @@ public class PlayerController : CreatureController
 
         if (_moveDirection != Vector2.zero)
         {
-            _indicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI - 90);
+            _indicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI);
         }
 
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -140,6 +141,24 @@ public class PlayerController : CreatureController
 
             yield return wait;
         }
+    }
+
+    #endregion
+
+    #region Sword
+
+    SwordController _sword;
+    void StartSword()
+    {
+        if (_sword.IsValid())
+        {
+            return;
+        }
+
+        _sword = Managers.Object.Spawn<SwordController>(_indicator.position, Define.SWORD_ID);
+        _sword.transform.SetParent(_indicator);
+
+        _sword.ActivateSkill();
     }
 
     #endregion

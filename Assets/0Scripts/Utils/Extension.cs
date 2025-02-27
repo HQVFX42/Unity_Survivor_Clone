@@ -13,14 +13,15 @@ public static class Extension
         return Utils.GetOrAddComponent<T>(go);
     }
 
-    //public static void BindEvent(this GameObject go, Action action, Define.UIEvent type = Define.UIEvent.Click)
+    //public static void BindEvent(this GameObject go, Action action, Define.EUIEvent type = Define.EUIEvent.Click)
     //{
     //    UI_Base.BindEvent(go, action, type);
     //}
-    //public static void BindEvent(this GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.UIEvent type = Define.UIEvent.Click)
-    //{
-    //    UI_Base.BindEvent(go, action, dragAction, type);
-    //}
+
+    public static void BindEvent(this GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.EUIEvent type = Define.EUIEvent.Click)
+    {
+        UI_Base.BindEvent(go, action, dragAction, type);
+    }
 
     public static bool IsValid(this GameObject go)
     {

@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class UI_SkillCardItem : UI_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool Init()
     {
-        
+        if (base.Init() == false)
+        {
+            return false;
+        }
+
+        #region Object Bind
+        gameObject.BindEvent(OnClicked);
+        #endregion
+
+        return true;
+    }
+
+    public void SetInfo()
+    {
+
+    }
+
+    public void OnClicked()
+    {
+
     }
 }

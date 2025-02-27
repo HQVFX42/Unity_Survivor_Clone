@@ -18,12 +18,36 @@ public class Define
         Effect,
     }
 
+    public enum EWaveType
+    {
+        None,
+        RedZone,
+        Elete,
+        Boss
+    }
+
+    public enum ECreatureState
+    {
+        Idle,
+        Skill,
+        Moving,
+        OnDamaged,
+        Dead
+    }
+
     public enum EObjectType
     {
         Player,
         Monster,
+        EliteMonster,
+        Boss,
         Projectile,
-        Env,
+        Gem,
+        Soul,
+        Potion,
+        DropBox,
+        Magnet,
+        Bomb
     }
 
     public enum ESkillType
@@ -32,6 +56,12 @@ public class Define
         Melee,
         Projectile,
         Misc,
+    }
+
+    public enum EJoystickType
+    {
+        Fixed,
+        Flexible
     }
 
     public enum EUIEvent

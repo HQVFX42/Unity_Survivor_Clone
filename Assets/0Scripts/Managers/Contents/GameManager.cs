@@ -27,4 +27,21 @@ public class GameManager
     public int Gold {  get; set; }
     public int Gem { get; set; }
     #endregion
+
+    #region Battle
+
+    int _killCount;
+    public event Action<int> OnKillCountChanged;
+
+    public int KillCount
+    {
+        get { return _killCount; }
+        set
+        {
+            _killCount = value;
+            OnKillCountChanged?.Invoke(value);
+        }
+    }
+
+    #endregion
 }

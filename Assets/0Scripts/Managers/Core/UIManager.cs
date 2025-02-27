@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.SceneManagement;
 
 public class UIManager
@@ -11,6 +12,18 @@ public class UIManager
     public T GetSceneUI<T>() where T : UI_Base
     {
         return _sceneUI as T;
+    }
+
+    public T MakeSubItem<T>(Transform parent = null, string name = null, bool pooling = true) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).Name;
+        }
+
+        GameObject go = Managers.Resource.Instantiate($"{name}", parent, pooling);
+        go.transform.SetParent(parent);
+        return Utils.GetOrAddComponent<T>(go);
     }
 
     public T ShowSceneUI<T>() where T : UI_Base

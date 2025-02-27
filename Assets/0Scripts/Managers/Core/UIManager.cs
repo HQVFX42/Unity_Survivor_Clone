@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager
 {
     UI_Base _sceneUI;
-    Stack<UI_Base> _uiStack = new Stack<UI_Base>();
+    Stack<UI_Base> _popupStack = new Stack<UI_Base>();
 
     public T GetSceneUI<T>() where T : UI_Base
     {
@@ -30,19 +31,40 @@ public class UIManager
     {
         string key = typeof(T).Name + ".prefab";
         T ui = Managers.Resource.Instantiate(key, pooling: true).GetOrAddComponent<T>();
-        _uiStack.Push(ui);
+        _popupStack.Push(ui);
 
         return ui;
     }
 
     public void ClosePopup(UI_Base popup)
     {
-        if (_uiStack.Count == 0)
+        if (_popupStack.Count == 0)
         {
             return;
         }
 
-        UI_Base ui = _uiStack.Pop();
+        UI_Base ui = _popupStack.Pop();
         Managers.Resource.Destroy(ui.gameObject);
+    }
+
+    public void RefreshTimeScale()
+    {
+        if (SceneManager.GetActiveScene().name != Define.EScene.GameScene.ToString())
+        {
+            Time.timeScale = 1;
+            return;
+        }
+
+        if (_popupStack.Count > 0)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        //DOTween.timeScale = 1;
+        //OnTimeScaleChanged?.Invoke((int)Time.timeScale);
     }
 }

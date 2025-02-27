@@ -24,6 +24,8 @@ public class GameScene : MonoBehaviour
     {
         Managers.Data.Init();
 
+        Managers.UI.ShowSceneUI<UI_GameScene>();
+
         _spawningPool = gameObject.AddComponent<SpawningPool>();
 
         PlayerController player = Managers.Object.Spawn<PlayerController>(Vector3.zero);

@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Define;
 
 public class ObjectManager
 {
@@ -120,4 +123,40 @@ public class ObjectManager
             GameObject.Find("Grid").GetComponent<GridController>().Remove(obj.gameObject);
         }
     }
+
+    //public void KillAllMonsters()
+    //{
+    //    UI_GameScene scene = Managers.UI.SceneUI as UI_GameScene;
+
+    //    if (scene != null)
+    //        scene.DoWhiteFlash();
+    //    foreach (MonsterController monster in Monsters.ToList())
+    //    {
+    //        if (monster.ObjectType == ObjectType.Monster)
+    //            monster.OnDead();
+    //    }
+    //    DespawnAllMonsterProjectiles();
+    //}
+
+    //public void DespawnAllMonsterProjectiles()
+    //{
+    //    foreach (ProjectileController proj in Projectiles.ToList())
+    //    {
+    //        if (proj.Skill.SkillType == SkillType.MonsterSkill_01)
+    //            Despawn(proj);
+    //    }
+    //}
+
+    //public void CollectAllItems()
+    //{
+    //    foreach (GemController gem in Gems.ToList())
+    //    {
+    //        gem.GetItem();
+    //    }
+
+    //    foreach (SoulController soul in Souls.ToList())
+    //    {
+    //        soul.GetItem();
+    //    }
+    //}
 }

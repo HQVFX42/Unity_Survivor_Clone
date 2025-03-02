@@ -4,6 +4,66 @@ using UnityEngine;
 
 public class MonsterController : CreatureController
 {
+    Define.ECreatureState _creatureState = Define.ECreatureState.Moving;
+    public virtual Define.ECreatureState CreatureState
+    {
+        get
+        {
+            return _creatureState;
+        }
+        set
+        {
+            _creatureState = value;
+            UpdateAnimation();
+        }
+    }
+
+    public virtual void UpdateAnimation()
+    {
+        
+    }
+
+    public override void UpdateController()
+    {
+        base.UpdateController();
+
+        switch (CreatureState)
+        {
+            case Define.ECreatureState.Idle:
+                break;
+            case Define.ECreatureState.Moving:
+                break;
+            case Define.ECreatureState.Skill:
+                break;
+            case Define.ECreatureState.OnDamaged:
+                break;
+            case Define.ECreatureState.Dead:
+                break;
+        }
+    }
+
+    protected virtual void UpdateIdle()
+    {
+
+    }
+
+    protected virtual void UpdateMoving()
+    {
+    }
+
+    protected virtual void UpdateSkill()
+    {
+    }
+
+    protected virtual void UpdateOnDamaged()
+    {
+    }
+
+    protected virtual void UpdateDead()
+    {
+    }
+
+
     public override bool Init()
     {
         if (base.Init())

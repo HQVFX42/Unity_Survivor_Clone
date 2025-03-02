@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
   - m_GUID: cdf16d0632ae6794894ec27860c3af21
-    m_Address: UI_GameScene.prefab
+    m_Address: UI_GameScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

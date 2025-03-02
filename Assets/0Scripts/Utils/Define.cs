@@ -29,8 +29,8 @@ public class Define
     public enum ECreatureState
     {
         Idle,
-        Skill,
         Moving,
+        Skill,
         OnDamaged,
         Dead
     }

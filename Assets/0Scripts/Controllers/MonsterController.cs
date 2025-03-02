@@ -18,9 +18,10 @@ public class MonsterController : CreatureController
         }
     }
 
+    protected Animator _animator;
     public virtual void UpdateAnimation()
     {
-        
+
     }
 
     public override void UpdateController()
@@ -30,14 +31,19 @@ public class MonsterController : CreatureController
         switch (CreatureState)
         {
             case Define.ECreatureState.Idle:
+                UpdateIdle();
                 break;
             case Define.ECreatureState.Moving:
+                UpdateMoving();
                 break;
             case Define.ECreatureState.Skill:
+                UpdateSkill();
                 break;
             case Define.ECreatureState.OnDamaged:
+                UpdateOnDamaged();
                 break;
             case Define.ECreatureState.Dead:
+                UpdateDead();
                 break;
         }
     }
@@ -71,7 +77,9 @@ public class MonsterController : CreatureController
             return false;
         }
 
+        _animator = GetComponent<Animator>();
         ObjectType = Define.EObjectType.Monster;
+        CreatureState = Define.ECreatureState.Moving;
 
         return true;
     }
@@ -79,7 +87,12 @@ public class MonsterController : CreatureController
     void FixedUpdate()
     {
         PlayerController pc = Managers.Object.Player;
-        if (pc == null)
+        if (!pc.IsValid())
+        {
+            return;
+        }
+
+        if (CreatureState != Define.ECreatureState.Moving)
         {
             return;
         }

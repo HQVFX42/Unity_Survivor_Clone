@@ -53,6 +53,9 @@ public class Define
     public enum ESkillType
     {
         None,
+        Sword,
+        Sequence,
+        Repeat,
         Melee,
         Projectile,
         Misc,

@@ -15,6 +15,10 @@ public class PlayerController : CreatureController
     [SerializeField]
     Transform _fireSocket;
 
+    public Transform Indicator { get { return _indicator; } }
+    public Vector3 FireSocket { get { return _fireSocket.position; } }
+    public Vector3 ShootDirection { get { return (_fireSocket.position - _indicator.position).normalized; } }
+
     //public Vector2 MoveDirection
     //{
     //    get
@@ -44,9 +48,6 @@ public class PlayerController : CreatureController
 
         //event
         Managers.Game.OnMoveDirectionChanged += HandleOnMoveDirectionChanged;
-
-        //StartProjectile();
-        StartSword();
 
         return true;
     }
@@ -107,61 +108,13 @@ public class PlayerController : CreatureController
         }
     }
 
-    public override void OnDamaged(BaseController attacker, int damage)
+    public override void OnDamaged(BaseController attacker, SkillBase skill = null, float damage = 0)
     {
-        base.OnDamaged(attacker, damage);
+        base.OnDamaged(attacker);
 
         //Debug.Log($"OnDamaged: Hp = {Hp}, {damage} by {attacker.name} ");
 
         //CreatureController cc = attacker as CreatureController;
         //cc?.OnDamaged(this, 100);
     }
-
-    //TODO: refactoring
-    #region FireProjectile
-
-    Coroutine _coFireProjectile;
-
-    void StartProjectile()
-    {
-        if (_coFireProjectile != null)
-        {
-            StopCoroutine(_coFireProjectile);
-        }
-
-        _coFireProjectile = StartCoroutine(CoStartProjectile());
-    }
-
-    IEnumerator CoStartProjectile()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.5f);
-
-        while (true)
-        {
-            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(_fireSocket.position, 1);
-            pc.SetInfo(1, this, (_fireSocket.position - _indicator.position).normalized);
-
-            yield return wait;
-        }
-    }
-
-    #endregion
-
-    #region Sword
-
-    SwordController _sword;
-    void StartSword()
-    {
-        if (_sword.IsValid())
-        {
-            return;
-        }
-
-        _sword = Managers.Object.Spawn<SwordController>(_indicator.position, Define.SWORD_ID);
-        _sword.transform.SetParent(_indicator);
-
-        _sword.ActivateSkill();
-    }
-
-    #endregion
 }

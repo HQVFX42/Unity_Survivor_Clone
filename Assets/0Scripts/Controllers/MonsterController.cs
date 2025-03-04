@@ -4,72 +4,6 @@ using UnityEngine;
 
 public class MonsterController : CreatureController
 {
-    Define.ECreatureState _creatureState = Define.ECreatureState.Moving;
-    public virtual Define.ECreatureState CreatureState
-    {
-        get
-        {
-            return _creatureState;
-        }
-        set
-        {
-            _creatureState = value;
-            UpdateAnimation();
-        }
-    }
-
-    protected Animator _animator;
-    public virtual void UpdateAnimation()
-    {
-
-    }
-
-    public override void UpdateController()
-    {
-        base.UpdateController();
-
-        switch (CreatureState)
-        {
-            case Define.ECreatureState.Idle:
-                UpdateIdle();
-                break;
-            case Define.ECreatureState.Moving:
-                UpdateMoving();
-                break;
-            case Define.ECreatureState.Skill:
-                UpdateSkill();
-                break;
-            case Define.ECreatureState.OnDamaged:
-                UpdateOnDamaged();
-                break;
-            case Define.ECreatureState.Dead:
-                UpdateDead();
-                break;
-        }
-    }
-
-    protected virtual void UpdateIdle()
-    {
-
-    }
-
-    protected virtual void UpdateMoving()
-    {
-    }
-
-    protected virtual void UpdateSkill()
-    {
-    }
-
-    protected virtual void UpdateOnDamaged()
-    {
-    }
-
-    protected virtual void UpdateDead()
-    {
-    }
-
-
     public override bool Init()
     {
         if (base.Init())
@@ -77,7 +11,6 @@ public class MonsterController : CreatureController
             return false;
         }
 
-        _animator = GetComponent<Animator>();
         ObjectType = Define.EObjectType.Monster;
         CreatureState = Define.ECreatureState.Moving;
 
@@ -102,6 +35,27 @@ public class MonsterController : CreatureController
         GetComponent<Rigidbody2D>().MovePosition(newPosition);
 
         GetComponent<SpriteRenderer>().flipX = dir.x > 0;
+    }
+
+    public override void UpdateAnimation()
+    {
+        base.UpdateAnimation();
+
+        switch (CreatureState)
+        {
+            case Define.ECreatureState.Idle:
+                UpdateIdle();
+                break;
+            case Define.ECreatureState.Skill:
+                UpdateSkill();
+                break;
+            case Define.ECreatureState.Moving:
+                UpdateMoving();
+                break;
+            case Define.ECreatureState.Dead:
+                UpdateDead();
+                break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -147,7 +101,7 @@ public class MonsterController : CreatureController
     {
         while (true)
         {
-            target.OnDamaged(this, 1);
+            target.OnDamaged(this);
 
             yield return new WaitForSeconds(0.1f);
         }

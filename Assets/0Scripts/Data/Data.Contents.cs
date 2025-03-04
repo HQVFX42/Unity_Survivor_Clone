@@ -123,6 +123,7 @@ namespace Data
     //[Serializable]
     //public class PlayerData
     //{
+    //    public int DataId;
     //    public int level;
     //    public int maxHp;
     //    public int attack;

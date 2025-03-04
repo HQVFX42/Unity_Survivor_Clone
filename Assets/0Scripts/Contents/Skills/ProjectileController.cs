@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileController : SkillController
+public class ProjectileController : SkillBase
 {
     CreatureController _owner;
     Vector3 _moveDirection;
@@ -51,7 +51,7 @@ public class ProjectileController : SkillController
             return;
         }
 
-        mc.OnDamaged(_owner, SkillData.damage);
+        mc.OnDamaged(_owner);
 
         StopDestroy();
 

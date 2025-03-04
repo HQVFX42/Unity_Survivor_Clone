@@ -74,7 +74,7 @@ public class ObjectManager
 
             return pc as T;
         }
-        else if (typeof(T).IsSubclassOf(typeof(SkillController)))
+        else if (typeof(T).IsSubclassOf(typeof(SkillBase)))
         {
             if (Managers.Data.SkillDictionary.TryGetValue(templateID, out Data.SkillData skillData) == false)
             {

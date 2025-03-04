@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordController : SkillController
+public class Sword : RepeatSkill
 {
     [SerializeField]
     ParticleSystem[] _particles;
@@ -15,24 +15,12 @@ public class SwordController : SkillController
         Fourth,
     }
 
-    public override bool Init()
+    private void Awake()
     {
-        base.Init();
-
-        for (int i = 0; i < _particles.Length; i++)
-        {
-            _particles[i].GetComponent<Rigidbody2D>().simulated = false;
-        }
-
-        for (int i = 0; i < _particles.Length; i++)
-        {
-            _particles[i].gameObject.GetOrAddComponent<SwordChild>().SetInfo(Managers.Game.Player, 100);
-        }
-
-        return true;
+        SkillType = Define.ESkillType.Sword;
     }
 
-    public void ActivateSkill()
+    public override void ActivateSkill()
     {
         StartCoroutine(CoSwingSword());
     }
@@ -88,5 +76,24 @@ public class SwordController : SkillController
         }
 
         _particles[(int)swingType].GetComponent<Rigidbody2D>().simulated = simulated;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (this.IsLearnedSkill == false)
+        {
+            return;
+        }
+
+        CreatureController creature = collision.transform.GetComponent<CreatureController>();
+        if (creature?.IsMonster() == true)
+        {
+            creature.OnDamaged(Managers.Game.Player, this);
+        }
+    }
+
+    protected override void DoSkillJob()
+    {
+        StartCoroutine(CoSwingSword());
     }
 }

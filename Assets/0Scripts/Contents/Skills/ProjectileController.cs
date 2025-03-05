@@ -20,7 +20,7 @@ public class ProjectileController : SkillBase
 
     public void SetInfo(int templateID, CreatureController owner, Vector3 moveDirection)
     {
-        if (Managers.Data.SkillDictionary.TryGetValue(templateID, out Data.SkillData data) == false)
+        if (Managers.Data.SkillDic.TryGetValue(templateID, out Data.SkillData data) == false)
         {
             Debug.LogError("Cannot find skill data");
             return;

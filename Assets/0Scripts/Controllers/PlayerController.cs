@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,14 @@ using UnityEngine;
 public class PlayerController : CreatureController
 {
     Vector2 _moveDirection = Vector2.zero;
+
+    #region Action
+    public Action OnPlayerDataUpdated;
+    public Action OnPlayerLevelUp;
+    public Action OnPlayerDead;
+    public Action OnPlayerDamaged;
+    public Action OnPlayerMove;
+    #endregion
 
     float EnvCollectRange = 1.0f;
 
@@ -30,6 +39,22 @@ public class PlayerController : CreatureController
     //        _moveDirection = value.normalized;
     //    }
     //}
+
+    public int KillCount
+    {
+        get { return Managers.Game.ContinueInfo.KillCount; }
+        set
+        {
+            Managers.Game.ContinueInfo.KillCount = value;
+            if (Managers.Game.DicMission.TryGetValue(Define.EMissionTarget.MonsterKill, out MissionInfo mission))
+                mission.Progress = value;
+            if (Managers.Game.ContinueInfo.KillCount % 500 == 0)
+            {
+                Skills.OnMonsterKillBonus();
+            }
+            OnPlayerDataUpdated?.Invoke();
+        }
+    }
 
     private void Start()
     {

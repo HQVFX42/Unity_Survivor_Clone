@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class Utils
 {
@@ -26,7 +28,7 @@ public class Utils
         return transform.gameObject;
     }
 
-    public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : Object
+    public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
     {
         if (go == null)
         {
@@ -64,8 +66,8 @@ public class Utils
 
     public static Vector2 GenerateMonsterSpawnPosition(Vector2 playerPosition, float minDistance = 10.0f, float maxDistance = 20.0f)
     {
-        float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
-        float distance = Random.Range(minDistance, maxDistance);
+        float angle = UnityEngine.Random.Range(0, 360) * Mathf.Deg2Rad;
+        float distance = UnityEngine.Random.Range(minDistance, maxDistance);
 
         float xDistance = Mathf.Cos(angle) * distance;
         float yDistance = Mathf.Sin(angle) * distance;
@@ -73,5 +75,50 @@ public class Utils
         Vector2 spawnPosition = playerPosition + new Vector2(xDistance, yDistance);
 
         return spawnPosition;
+    }
+
+    public static Color HexToColor(string color)
+    {
+        Color parsedColor;
+        ColorUtility.TryParseHtmlString("#" + color, out parsedColor);
+
+        return parsedColor;
+    }
+
+    //Enum값중 랜덤값 반환
+    public static T GetRandomEnumValue<T>() where T : struct, Enum
+    {
+        Type type = typeof(T);
+
+        if (!_enumDict.ContainsKey(type))
+            _enumDict[type] = Enum.GetValues(type);
+
+        Array values = _enumDict[type];
+
+        int index = UnityEngine.Random.Range(0, values.Length);
+        return (T)values.GetValue(index);
+    }
+
+    //string값 으로 Enum값 찾기
+    public static T ParseEnum<T>(string value)
+    {
+        return (T)Enum.Parse(typeof(T), value, true);
+    }
+
+    public static ESkillType GetSkillTypeFromInt(int value)
+    {
+        foreach (ESkillType skillType in Enum.GetValues(typeof(ESkillType)))
+        {
+            int minValue = (int)skillType;
+            int maxValue = minValue + 5; // 100501~ 100506 사이 값이면 100501값 리턴
+
+            if (value >= minValue && value <= maxValue)
+            {
+                return skillType;
+            }
+        }
+
+        Debug.LogError($" Faild add skill : {value}");
+        return ESkillType.None;
     }
 }

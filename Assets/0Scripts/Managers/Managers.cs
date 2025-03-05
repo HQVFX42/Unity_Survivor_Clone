@@ -11,9 +11,13 @@ public class Managers : MonoBehaviour
     GameManager _game = new GameManager();
     ObjectManager _object = new ObjectManager();
     PoolManager _pool = new PoolManager();
+    AchievementManager _achievment = new AchievementManager();
+
     public static GameManager Game { get { return Instance?._game; } }
     public static ObjectManager Object { get { return Instance?._object; } }
     public static PoolManager Pool { get { return Instance?._pool; } }
+
+    public static AchievementManager Achievement { get { return Instance?._achievment; } }
     #endregion
 
     #region Core
@@ -50,5 +54,14 @@ public class Managers : MonoBehaviour
 
             return s_instance;
         }
+    }
+
+    public static void Clear()
+    {
+        //Sound.Clear();
+        Scene.Clear();
+        //UI.Clear();
+        //Pool.Clear();
+        //Object.Clear();
     }
 }

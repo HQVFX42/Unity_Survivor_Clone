@@ -1,3 +1,4 @@
+using Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ public class SkillHandler : MonoBehaviour
     private List<SkillBase> _skillList = new List<SkillBase>();
     public List<SkillBase> SkillList { get { return _skillList; } }
     public List<SequenceSkill> SequenceSkills { get; } = new List<SequenceSkill>();
-    //public List<SupportSkillData> LockedSupportSkills { get; } = new List<SupportSkillData>();
-    //public List<SupportSkillData> SupportSkills = new List<SupportSkillData>();
+    public List<SupportSkillData> LockedSupportSkills { get; } = new List<SupportSkillData>();
+    public List<SupportSkillData> SupportSkills = new List<SupportSkillData>();
 
     public List<SkillBase> ActivatedSkills
     {
@@ -137,5 +138,29 @@ public class SkillHandler : MonoBehaviour
                 UpdateSkillUi?.Invoke();
             }
         }
+    }
+
+    public void OnMonsterKillBonus()
+    {
+        //List<SupportSkillData> passiveSkills = SupportSkills.Where(skill => skill.SupportSkillType == SupportSkillType.MonsterKill).ToList();
+
+        //float dmgReduction = 0;
+        //float atkRate = 0;
+        //float healAmount = 0;
+        //foreach (SupportSkillData passive in passiveSkills)
+        //{
+        //    if (passive.SupportSkillName == SupportSkillName.Resurrection)
+        //        continue;
+        //    dmgReduction += passive.DamageReduction;
+        //    atkRate += passive.AtkRate;
+        //    healAmount += passive.HealRate;
+        //}
+
+        //PlayerController player = Managers.Game.Player;
+        //player.DamageReduction += dmgReduction;
+        //player.AttackRate += atkRate;
+
+        //player.UpdatePlayerStat();
+        //Managers.Game.Player.Healing(healAmount);
     }
 }

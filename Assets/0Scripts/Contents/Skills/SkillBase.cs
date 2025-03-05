@@ -31,6 +31,8 @@ public class SkillBase : BaseController
     public Data.SkillData SkillData { get; protected set; }
 
     public int SkillLevel { get; set; } = 0;
+
+    public float TotalDamage { get; set; } = 0;
     public bool IsLearnedSkill { get { return SkillLevel > 0; } }
 
     public int Damage { get; set; } = 100;

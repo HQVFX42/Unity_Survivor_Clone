@@ -7,5 +7,5 @@ public abstract class SequenceSkill : SkillBase
 {
     public int DataId;
     public abstract void DoSkill(Action callback = null);
-    public string AnimagtionName;
+    public string AnimationName;
 }

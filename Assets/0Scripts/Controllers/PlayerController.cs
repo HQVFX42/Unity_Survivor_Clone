@@ -31,6 +31,11 @@ public class PlayerController : CreatureController
     //    }
     //}
 
+    private void Start()
+    {
+        
+    }
+
     void OnDestroy()
     {
         if (Managers.Game != null)
@@ -44,7 +49,7 @@ public class PlayerController : CreatureController
             return false;
         }
 
-        _speed = 5.0f;
+        MoveSpeed = 5.0f;
 
         //event
         Managers.Game.OnMoveDirectionChanged += HandleOnMoveDirectionChanged;
@@ -67,7 +72,7 @@ public class PlayerController : CreatureController
     private void MovePlayer()
     {
         //_moveDirection = Managers.Game.MoveDir;
-        Vector3 dir = _moveDirection * _speed * Time.deltaTime;
+        Vector3 dir = _moveDirection * MoveSpeed * Time.deltaTime;
         transform.position += dir;
 
         if (_moveDirection != Vector2.zero)

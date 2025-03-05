@@ -56,6 +56,7 @@ public class Define
         Sword,
         Sequence,
         Repeat,
+        Dash,
         Melee,
         Projectile,
         Misc,

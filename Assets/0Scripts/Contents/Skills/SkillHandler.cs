@@ -90,6 +90,39 @@ public class SkillHandler : MonoBehaviour
         }
     }
 
+    int _sequenceIndex = 0;
+    bool _bStopped = false;
+
+    public void StartNextSequenceSkill()
+    {
+        if (_bStopped)
+        {
+            return;
+        }
+        if (SequenceSkills.Count == 0)
+        {
+            return;
+        }
+
+        SequenceSkills[_sequenceIndex].DoSkill(OnFinishedSequenceSkill);
+    }
+
+    void OnFinishedSequenceSkill()
+    {
+        _sequenceIndex = (_sequenceIndex + 1) % SequenceSkills.Count;
+        StartNextSequenceSkill();
+    }
+
+    public void StopSkills()
+    {
+        _bStopped = true;
+
+        foreach (var skill in ActivatedSkills)
+        {
+            skill.StopAllCoroutines();
+        }
+    }
+
     public void LevelUpSkill(Define.ESkillType skillType)
     {
         for (int i = 0; i < SkillList.Count; i++)

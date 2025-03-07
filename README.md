@@ -96,7 +96,6 @@
   
 - Enum
   ```cpp
-    #region Enum
     enum GameObjects
     {
         ContentObject,
@@ -121,7 +120,6 @@
         StatisticsButton,
         ConfirmButton,
     }
-    #endregion
   ```
 
 ## Addressable

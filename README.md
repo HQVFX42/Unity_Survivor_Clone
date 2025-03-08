@@ -2,22 +2,6 @@
 
 ## UnityEngine.Pool
 - [PoolManager.cs](./Assets/0Scripts/Managers/Contents/PoolManager.cs)
-- Setup root transform
-  ```csharp
-    Transform _root;
-    Transform Root
-    {
-        get
-        {
-            if (_root == null)
-            {
-                GameObject go = new GameObject() { name = $"{_prefab.name}_Root" };
-                _root = go.transform;
-            }
-            return _root;
-        }
-    }
-  ```
 
 ## Addressable
 - Resource

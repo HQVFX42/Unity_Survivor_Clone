@@ -1,7 +1,7 @@
 # Unity_Survivor_Clone
 
 ## UnityEngine.Pool
-- [PoolManager.cs](./Assets/0Scripts/Managers/PoolManager.cs)
+- [PoolManager.cs](./Assets/0Scripts/Managers/Contents/PoolManager.cs)
 
 ## Addressable
 - Resource

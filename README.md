@@ -3,123 +3,158 @@
 ## Managers
 
 ## UI
-- Bind
+- Before
   ```cpp
-    protected void Bind<T>(Type type) where T : UnityEngine.Object
+    private readonly string PopUpPurchasePrefabPath = "lobbyitem/popup_shop_purchase";
+    private readonly string PopUpShortagePrefabPath = "lobbyitem/popup_shop_shortage";
+    private readonly string PopUpShortageItemPrefabPath = "lobbyitem/shop_item/shortage_item";
+    private readonly string PopUpPlatinumChestInfoPrefabPath = "lobbyitem/popup_shop_Sequipinfo";
+
+    private readonly string CloseButtonPath = "panel/btn_x";
+    private readonly string PopUpPurchaseButtonPath = "panel/content/bottom/btn_purchase";
+    private readonly string SpecialPackDetailsButtonPath = "content/left/btn_details";
+    private readonly string OpenOneButtonPath = "content/right/btn/btn_open_1";
+    private readonly string OpenTenButtonPath = "content/right/btn/btn_open_10";
+    private readonly string BoxNormalADButtonPath = "content/item_01/btn/btn_ad";
+    private readonly string BoxNormalOpenButtonPath = "content/item_01/btn/btn_open_1";
+    private readonly string BoxLuxuryADButtonPath = "content/item_02/btn/btn_ad";
+    private readonly string BoxLuxuryOpenButtonPath = "content/item_02/btn/btn_open_1";
+
+    private readonly Dictionary<EPDType, string> ShopItemPaths = new Dictionary<EPDType, string>()
     {
-        string[] names = Enum.GetNames(type);
-        UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
-        _objects.Add(typeof(T), objects);
+        { EPDType.STARTER, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/starters_pack"},
+        { EPDType.PACKAGE, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/package" },
+        { EPDType.DAILY, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/daily_shop" },
+        { EPDType.SPECIAL, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/platinum_chest" },
+        { EPDType.BOX, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/platinum_chest" },
+        { EPDType.GEM, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/gem" },
+        { EPDType.GOLD, "SafeArena/Viewport/Content/shop/bg/Scroll View/Viewport/Content/gold" },
+    };
 
-        for (int i = 0; i < names.Length; i++)
-        {
-            if (typeof(T) == typeof(GameObject))
-            {
-                objects[i] = Utils.FindChild(gameObject, names[i], true);
-            }
-            else
-            {
-                objects[i] = Utils.FindChild<T>(gameObject, names[i], true);
-            }
-
-            if (objects[i] == null)
-            {
-                Debug.Log($"Failed to bind({names[i]})");
-            }
-        }
-    }
-
-    protected void BindObject(Type type) { Bind<GameObject>(type); }
-    protected void BindImage(Type type) { Bind<Image>(type); }
-    protected void BindText(Type type) { Bind<TMP_Text>(type); }
-    protected void BindButton(Type type) { Bind<Button>(type); }
-    protected void BindToggle(Type type) { Bind<Toggle>(type); }
+    private Button SpecialPackDetailsButton;
+    private Button SpecialPackOneButton;
+    private Button SpecialPackTenButton;
+    private Button BoxNormalADButton;
+    private Button BoxNormalOpenButton;
+    private Button BoxLuxuryADButton;
+    private Button BoxLuxuryOpenButton;
   ```
-- Get
-  ```cpp
-    protected T Get<T>(int idx) where T : UnityEngine.Object
-    {
-        UnityEngine.Object[] objects = null;
-        if (_objects.TryGetValue(typeof(T), out objects) == false)
-        {
-            return null;
-        }
-
-        return objects[idx] as T;
-    }
-
-    protected GameObject GetObject(int idx) { return Get<GameObject>(idx); }
-    protected TMP_Text GetText(int idx) { return Get<TMP_Text>(idx); }
-    protected Button GetButton(int idx) { return Get<Button>(idx); }
-    protected Image GetImage(int idx) { return Get<Image>(idx); }
-    protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
-  ```
-- Events
-  ```cpp
-    public static void BindEvent(GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.EUIEvent type = Define.EUIEvent.Click)
-    {
-        UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
-
-        switch (type)
-        {
-            case Define.EUIEvent.Click:
-                evt.OnClickHandler -= action;
-                evt.OnClickHandler += action;
-                break;
-            case Define.EUIEvent.Preseed:
-                evt.OnPressedHandler -= action;
-                evt.OnPressedHandler += action;
-                break;
-            case Define.EUIEvent.PointerDown:
-                evt.OnPointerDownHandler -= action;
-                evt.OnPointerDownHandler += action;
-                break;
-            case Define.EUIEvent.PointerUp:
-                evt.OnPointerUpHandler -= action;
-                evt.OnPointerUpHandler += action;
-                break;
-            case Define.EUIEvent.Drag:
-                evt.OnDragHandler -= dragAction;
-                evt.OnDragHandler += dragAction;
-                break;
-            case Define.EUIEvent.BeginDrag:
-                evt.OnBeginDragHandler -= dragAction;
-                evt.OnBeginDragHandler += dragAction;
-                break;
-            case Define.EUIEvent.EndDrag:
-                evt.OnEndDragHandler -= dragAction;
-                evt.OnEndDragHandler += dragAction;
-                break;
-        }
-    }
-  ```
+- After
+  - Bind
+    ```cpp
+      protected void Bind<T>(Type type) where T : UnityEngine.Object
+      {
+          string[] names = Enum.GetNames(type);
+          UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
+          _objects.Add(typeof(T), objects);
   
-- Enum
-  ```cpp
-    enum GameObjects
-    {
-        ContentObject,
-        ResultRewardScrollContentObject,
-        ResultGoldObject,
-        ResultKillObject,
-    }
+          for (int i = 0; i < names.Length; i++)
+          {
+              if (typeof(T) == typeof(GameObject))
+              {
+                  objects[i] = Utils.FindChild(gameObject, names[i], true);
+              }
+              else
+              {
+                  objects[i] = Utils.FindChild<T>(gameObject, names[i], true);
+              }
+  
+              if (objects[i] == null)
+              {
+                  Debug.Log($"Failed to bind({names[i]})");
+              }
+          }
+      }
+  
+      protected void BindObject(Type type) { Bind<GameObject>(type); }
+      protected void BindImage(Type type) { Bind<Image>(type); }
+      protected void BindText(Type type) { Bind<TMP_Text>(type); }
+      protected void BindButton(Type type) { Bind<Button>(type); }
+      protected void BindToggle(Type type) { Bind<Toggle>(type); }
+    ```
+  - Get
+    ```cpp
+      protected T Get<T>(int idx) where T : UnityEngine.Object
+      {
+          UnityEngine.Object[] objects = null;
+          if (_objects.TryGetValue(typeof(T), out objects) == false)
+          {
+              return null;
+          }
+  
+          return objects[idx] as T;
+      }
+  
+      protected GameObject GetObject(int idx) { return Get<GameObject>(idx); }
+      protected TMP_Text GetText(int idx) { return Get<TMP_Text>(idx); }
+      protected Button GetButton(int idx) { return Get<Button>(idx); }
+      protected Image GetImage(int idx) { return Get<Image>(idx); }
+      protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
+    ```
+  - Events
+    ```cpp
+      public static void BindEvent(GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.EUIEvent type = Define.EUIEvent.Click)
+      {
+          UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
+  
+          switch (type)
+          {
+              case Define.EUIEvent.Click:
+                  evt.OnClickHandler -= action;
+                  evt.OnClickHandler += action;
+                  break;
+              case Define.EUIEvent.Preseed:
+                  evt.OnPressedHandler -= action;
+                  evt.OnPressedHandler += action;
+                  break;
+              case Define.EUIEvent.PointerDown:
+                  evt.OnPointerDownHandler -= action;
+                  evt.OnPointerDownHandler += action;
+                  break;
+              case Define.EUIEvent.PointerUp:
+                  evt.OnPointerUpHandler -= action;
+                  evt.OnPointerUpHandler += action;
+                  break;
+              case Define.EUIEvent.Drag:
+                  evt.OnDragHandler -= dragAction;
+                  evt.OnDragHandler += dragAction;
+                  break;
+              case Define.EUIEvent.BeginDrag:
+                  evt.OnBeginDragHandler -= dragAction;
+                  evt.OnBeginDragHandler += dragAction;
+                  break;
+              case Define.EUIEvent.EndDrag:
+                  evt.OnEndDragHandler -= dragAction;
+                  evt.OnEndDragHandler += dragAction;
+                  break;
+          }
+      }
+    ```
     
-    enum Texts
-    {
-        GameResultPopupTitleText,
-        ResultStageValueText,
-        ResultSurvivalTimeText,
-        ResultSurvivalTimeValueText,
-        ResultKillValueText,
-        ConfirmButtonText,
-        ResultGoldValueText
-    }
-    
-    enum Buttons
-    {
-        StatisticsButton,
-        ConfirmButton,
-    }
-  ```
-
-## Addressable
+  - Enum
+    ```cpp
+      enum GameObjects
+      {
+          ContentObject,
+          ResultRewardScrollContentObject,
+          ResultGoldObject,
+          ResultKillObject,
+      }
+      
+      enum Texts
+      {
+          GameResultPopupTitleText,
+          ResultStageValueText,
+          ResultSurvivalTimeText,
+          ResultSurvivalTimeValueText,
+          ResultKillValueText,
+          ConfirmButtonText,
+          ResultGoldValueText
+      }
+      
+      enum Buttons
+      {
+          StatisticsButton,
+          ConfirmButton,
+      }
+    ```

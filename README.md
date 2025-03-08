@@ -1,6 +1,53 @@
 # Unity_Survivor_Clone
 
-## Managers
+## Addressable
+- ResourceManager
+  ```csharp
+    #region Addressable
+    public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
+    {
+        // Check cashed resources
+        if (_resources.TryGetValue(key, out UnityEngine.Object resource))
+        {
+            callback?.Invoke(resource as T);
+            return;
+        }
+
+        string loadKey = key;
+        if (key.Contains(".sprite"))
+        {
+            loadKey = $"{key}[{key.Replace(".sprite", "")}]";
+        }
+
+        // Load async resource
+        var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
+        asyncOperation.Completed += (op) =>
+        {
+            _resources.Add(key, op.Result);
+            callback?.Invoke(op.Result);
+        };
+    }
+
+    public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
+    {
+        var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+        opHandle.Completed += (op) =>
+        {
+            int loadCount = 0;
+            int totalCount = op.Result.Count;
+
+            foreach (var result in op.Result)
+            {
+                LoadAsync<T>(result.PrimaryKey, (obj) =>
+                {
+                    loadCount++;
+                    callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                });
+            }
+        };
+    }
+    #endregion
+  ```
 
 ## UI
 ### Before

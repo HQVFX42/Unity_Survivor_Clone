@@ -1,7 +1,7 @@
 # Unity_Survivor_Clone
 
 ## Addressable
-- ResourceManager
+- Resource
   ```csharp
     #region Addressable
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object

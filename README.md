@@ -4,6 +4,7 @@
 
 ## UI
 ### Before
+- Find
   ```csharp
     private readonly string PopUpPurchasePrefabPath = "lobbyitem/popup_shop_purchase";
     private readonly string PopUpShortagePrefabPath = "lobbyitem/popup_shop_shortage";

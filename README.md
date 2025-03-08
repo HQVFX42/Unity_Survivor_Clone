@@ -4,7 +4,7 @@
 
 ## UI
 - Before
-  ```cpp
+  ```csharp
     private readonly string PopUpPurchasePrefabPath = "lobbyitem/popup_shop_purchase";
     private readonly string PopUpShortagePrefabPath = "lobbyitem/popup_shop_shortage";
     private readonly string PopUpShortageItemPrefabPath = "lobbyitem/shop_item/shortage_item";
@@ -41,7 +41,7 @@
   ```
 - After
   - Bind
-    ```cpp
+    ```csharp
       protected void Bind<T>(Type type) where T : UnityEngine.Object
       {
           string[] names = Enum.GetNames(type);
@@ -73,7 +73,7 @@
       protected void BindToggle(Type type) { Bind<Toggle>(type); }
     ```
   - Get
-    ```cpp
+    ```csharp
       protected T Get<T>(int idx) where T : UnityEngine.Object
       {
           UnityEngine.Object[] objects = null;
@@ -92,7 +92,7 @@
       protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
     ```
   - Events
-    ```cpp
+    ```csharp
       public static void BindEvent(GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.EUIEvent type = Define.EUIEvent.Click)
       {
           UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
@@ -132,7 +132,7 @@
     ```
     
   - Enum
-    ```cpp
+    ```csharp
       enum GameObjects
       {
           ContentObject,

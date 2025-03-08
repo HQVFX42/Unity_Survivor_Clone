@@ -3,7 +3,7 @@
 ## Managers
 
 ## UI
-- Before
+### Before
   ```csharp
     private readonly string PopUpPurchasePrefabPath = "lobbyitem/popup_shop_purchase";
     private readonly string PopUpShortagePrefabPath = "lobbyitem/popup_shop_shortage";
@@ -39,7 +39,7 @@
     private Button BoxLuxuryADButton;
     private Button BoxLuxuryOpenButton;
   ```
-- After
+### After
   - Bind
     ```csharp
       protected void Bind<T>(Type type) where T : UnityEngine.Object
